@@ -2,16 +2,27 @@
   "name": "project",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "dependencies": {
     "express": "^4.16.4",
     "hbs": "^4.0.3",
+    "promise": "^8.0.3",
+    "readline-sync": "^1.4.9",
+    "request": "^2.88.0",
     "yargs": "^13.2.2"
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Erjin-v5/project.git"
+  },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Erjin-v5/project/issues"
+  },
+  "homepage": "https://github.com/Erjin-v5/project#readme"
 }
