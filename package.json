@@ -1,0 +1,39 @@
+{
+  "name": "project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "bcrypt": "^3.0.5",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "chai-http": "^4.2.1",
+    "dotenv": "^7.0.0",
+    "email-validator": "^2.0.4",
+    "express": "^4.16.4",
+    "hbs": "^4.0.3",
+    "mongodb": "^3.2.2",
+    "mongoose": "^5.4.21",
+    "promise": "^8.0.3",
+    "pug": "^2.0.3",
+    "readline-sync": "^1.4.9",
+    "request": "^2.88.0",
+    "require": "^2.4.20",
+    "yargs": "^13.2.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node bin/www",
+    "test": "npx mocha --exit --recursive test/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Erjin-v5/project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Erjin-v5/project/issues"
+  },
+  "homepage": "https://github.com/Erjin-v5/project#readme"
+}
