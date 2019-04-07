@@ -42,9 +42,9 @@ module.exports = (config) => {
           });
           /* There is something wrong with the saved User  */
           const savedUser = await user.save();
-    
+          console.log(savedUser.username)
           if (savedUser) {
-          return res.redirect('/sigup?success=true')
+          return res.redirect('/')
           }else
           {return next(new Error('Failed to save user for unknown reasons'));
         }
