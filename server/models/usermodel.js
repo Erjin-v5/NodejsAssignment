@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const SALT_ROUNDS = 12;
 
 const UserSchema = mongoose.Schema({
+    _id: mongoose.Schema.Types.ObjectId,
     username: {
         type: String,
         required: true,
@@ -31,6 +32,13 @@ const UserSchema = mongoose.Schema({
         minlength: 8,
 
     },
+    score: {
+        type: Number,
+        required: false,
+        trim: true,
+        index: {unique: true},
+        minlength: 0,
+    }
 
 },{
     timestamps: true,

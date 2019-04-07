@@ -5,6 +5,7 @@ const path = require('path');
 const createError = require('http-errors');
 const bodyParser = require('body-parser');
 const UserModel = require('./models/usermodel');
+const mongoose = require('mongoose');
 
 module.exports = (config) => {
 	const app = express();
@@ -36,6 +37,7 @@ module.exports = (config) => {
         console.log(1)
         try {
           const user = new UserModel({
+            _id: new mongoose.Types.ObjectId(),
             username: req.body.username,
             email: req.body.email,
             password: req.body.password,
@@ -52,8 +54,12 @@ module.exports = (config) => {
           return next(err);
         }
       });
-	//login : check the data
-	//logout: log out an account
+  //login : check the data
+  
+
+  //logout: log out an account
+  
+  
 
 app.use('/',  (req, res) => {
 	return res.render('main.hbs', { page: 'Home' });
