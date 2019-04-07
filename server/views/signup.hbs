@@ -27,7 +27,7 @@
         <div class="card-body">
     
             <!-- Material form register -->
-            <form style="color:white">
+            <form style="color:white" method="POST" action="signup">
                     <div class="card-header">SIGN UP</div>
                     <div class="card-body">
 
@@ -35,7 +35,7 @@
                 <div class="form-row">
                         <div class="form-group col-md-6">
                                 <i class="fa fa-user prefix grey-text"></i>
-                                <input type="text" id="materialFormCardNameEx" class="form-control"  class="btn btn-primary mb-0">
+                                <input type="text" id="materialFormCardNameEx" class="form-control" name='username'  class="btn btn-primary mb-0" required minlength=3>
                                 <label for="materialFormCardEmailEx" class="font-weight-light">User name</label>
 
                         </div>
@@ -48,19 +48,19 @@
                 <!-- Material input email -->
                 <div class="md-form">
                     <i class="fa fa-envelope prefix grey-text"></i>
-                    <input type="email" id="materialFormCardEmailEx" class="form-control">
-                    <label for="materialFormCardEmailEx" class="font-weight-light">Your email</label>
+                    <input type="email" id="materialFormCardEmailEx" class="form-control"  name='email' required> 
+                    <label for="materialFormCardEmailEx" class="font-weight-light" >Your email</label>
                 </div>
 
                 <!-- Material input password -->
                 <div class="md-form">
                     <i class="fa fa-lock prefix grey-text"></i>
-                    <input type="password" id="materialFormCardPasswordEx" class="form-control">
+                    <input type="password" id="materialFormCardPasswordEx" class="form-control" name='password' required minlength=6>
                     <label for="materialFormCardPasswordEx" class="font-weight-light">Your password</label>
                 </div>
     
                 <div class="text-center py-4 mt-3">
-                        <a href="/" class="btn btn-primary float-left"> Register</a>
+                    <button type="submit" class="btn btn-primary float-right" value="Submit">Register</button>
                     </div>
             </form>
             <!-- Material form register -->

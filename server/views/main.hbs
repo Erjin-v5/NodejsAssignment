@@ -8,7 +8,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style>
-      body {background-image: url("./photo/bg.jpg");
+      body {background-image: url("/photo/bg.jpg");
       background-repeat: no-repeat;
       background-size: cover }
       
@@ -23,7 +23,7 @@
             <div class="card-body">
 
                             <!-- Card body -->
-                    <form> 
+                    <form method="GET" action="game"> 
                             <div class="form-group" class="md-form">
                                 <i class="fa fa-user prefix grey-text"></i>
                 
@@ -41,9 +41,12 @@
                                     <i class="fa fa-user prefix grey-text"></i>
                 
                             </div>
-                            <a href="game" class="btn btn-primary"> Submit</a>
+                            {{!-- <a href="game" class="btn btn-primary"> Submit</a> --}}
+                            <button type="submit" class="btn btn-primary" method="GET", action="game" >Submit</button>
+
                             <!-- Link to sign up page-->
                             <a href="signup" class="btn btn-primary" >Sign up</a>
+                             {{!-- <button type="submit" class="btn btn-primary" method="GET", action="signup">Sign up</button> --}}
 
 
                           </form>
