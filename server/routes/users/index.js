@@ -1,11 +1,19 @@
 const express = require('express');
 const UserModel = require('../../models/UserModel');
+const passport = require('passport');
+
+
 
 const router = express.Router();
 
 module.exports = () => {
-  router.get('/signup',() => res.render('signup', { success: req.query.success }));
-
+  // Login feature: make sure user has the right login and password to check with database
+  router.post('/', passport.authenticate('local', {
+    successRedirect: '/game',
+    failureRedirect: '/signup?error=true',
+  }))
+  router.get('/game',(req,res) => res.render('game', { success: req.query.success },{error: req.query.error}));
+  router.get('/',(req,res) => res.render('signup', { success: req.query.success },{error: req.query.error}));
   router.post('/signup', async (req,res,next)=>{
     try{
         const user = new UserModel({

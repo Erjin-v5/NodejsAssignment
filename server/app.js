@@ -5,7 +5,12 @@ const path = require('path');
 const createError = require('http-errors');
 const bodyParser = require('body-parser');
 const UserModel = require('./models/usermodel');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 const mongoose = require('mongoose');
+const auth = require('./lib/auth');
+
 
 module.exports = (config) => {
 	const app = express();
@@ -14,10 +19,13 @@ module.exports = (config) => {
 	app.set('views', path.join(__dirname, './views'));
 	app.use('/', express.static(path.join(__dirname, '../public')));
 
-	app.use(bodyParser.json());
+  //save database json file
+  app.use(bodyParser.json());
 	app.use(bodyParser.urlencoded({
-		extended:false
-	}));
+		extended:true
+  }));
+  //use cookies to do login page
+  app.use(cookieParser());
 
 	app.locals.title = config.sitename;
 	  
@@ -26,15 +34,29 @@ module.exports = (config) => {
   //   Response.render('main.hbs', {
   //       title: 'Main'
   //   });
+  //load login
+  app.use(session({
+    secret: 'you are beautiful',
+    resave: true,
+    saveUninitialized: false,
+    store: new MongoStore({mongooseConnection: mongoose.connection})
+  }));
+
+  //passport check and login database info
+  app.use(auth.initialize);
+  app.use(auth.session);
+  app.use(auth.setUser);
+
   app.get('/favicon.ico', (req, res) => res.sendStatus(204));
 
-	app.get('/game', (req,res) => res.render('game', {success: req.query.success}));
 
 	app.get('/signup',(req,res) => res.render('signup', { success: req.query.success}));
-
+  
+  app.get('/game', (req,res)=> {
+    return res.render('game.hbs')
+  })
 	
   app.post('/signup', async(req,res,next)=>{
-        console.log(1)
         try {
           const user = new UserModel({
             _id: new mongoose.Types.ObjectId(),
@@ -44,7 +66,6 @@ module.exports = (config) => {
           });
           /* There is something wrong with the saved User  */
           const savedUser = await user.save();
-          console.log(savedUser.username)
           if (savedUser) {
           return res.redirect('/')
           }else
@@ -62,7 +83,12 @@ module.exports = (config) => {
   
 
 app.use('/',  (req, res) => {
-	return res.render('main.hbs', { page: 'Home' });
+  try {
+    req.session.visits = req.session.visits ? req.session.visits + 1 : 1;
+	  return res.render('main.hbs', { page: 'Home' });
+  } catch(err){
+    return next();
+  }
 });
 
  // catch 404 and forward to error handler
