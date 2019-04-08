@@ -5,6 +5,7 @@ const path = require('path');
 const createError = require('http-errors');
 const bodyParser = require('body-parser');
 const UserModel = require('./models/usermodel');
+const mongoose = require('mongoose');
 
 module.exports = (config) => {
 	const app = express();
@@ -36,15 +37,16 @@ module.exports = (config) => {
         console.log(1)
         try {
           const user = new UserModel({
+            _id: new mongoose.Types.ObjectId(),
             username: req.body.username,
             email: req.body.email,
             password: req.body.password,
           });
           /* There is something wrong with the saved User  */
           const savedUser = await user.save();
-    
+          console.log(savedUser.username)
           if (savedUser) {
-          return res.redirect('/sigup?success=true')
+          return res.redirect('/')
           }else
           {return next(new Error('Failed to save user for unknown reasons'));
         }
@@ -52,8 +54,12 @@ module.exports = (config) => {
           return next(err);
         }
       });
-	//login : check the data
-	//logout: log out an account
+  //login : check the data
+  
+
+  //logout: log out an account
+  
+  
 
 app.use('/',  (req, res) => {
 	return res.render('main.hbs', { page: 'Home' });
